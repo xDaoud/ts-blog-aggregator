@@ -21,6 +21,14 @@ export function setUser(username: string): void {
     writeConfig(cfg);
 }
 
+export function getUser() {
+    const cfg = readConfig()
+    if(!cfg.currentUserName){
+        throw new Error("no logged in user");
+    }
+    return cfg.currentUserName;
+}
+
 function getConfigFilePath(): string {
     return path.join(os.homedir(), ".gatorconfig.json");
 }
