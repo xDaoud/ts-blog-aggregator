@@ -8,3 +8,6 @@ export async function createFeed(name: string, url: string, userId: string) {
     return result;
 }
 
+export async function getFeedsWithUsers() {
+    return await db.select().from(feeds).innerJoin(users, eq(feeds.userId, users.id));
+}

@@ -8,6 +8,13 @@
       "when": 1771792976800,
       "tag": "0000_slimy_forgotten_one",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1771937876693,
+      "tag": "0001_perfect_mandroid",
+      "breakpoints": true
     }
   ]
 }
