@@ -1,7 +1,5 @@
-import { getUser } from "./config";
 import { getFeedByUrl } from "./db/queries/feeds";
 import { createFeedFollow } from "./db/queries/follows";
-import { getUserByName } from "./db/queries/users";
 import { User } from "./db/schema";
 
 export async function handlerFollow(cmdName: string, user: User, ...args: string[]) {

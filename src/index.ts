@@ -8,6 +8,7 @@ import { handlerLogin } from "./login.js";
 import { middlewareLoggedIn } from "./middleware/loggedIn.js";
 import { handlerRegister } from "./register.js";
 import { handleReset } from "./reset.js";
+import { handlerUnfollow } from "./unfollow.js";
 import { handlerUsers } from "./users.js";
 async function main() {
     const registry: CommandsRegistry = {};
@@ -20,6 +21,7 @@ async function main() {
     registerCommand(registry, "feeds", handlerFeeds);
     registerCommand(registry, "follow", middlewareLoggedIn(handlerFollow));
     registerCommand(registry, "following", middlewareLoggedIn(handlerFollowing));
+    registerCommand(registry, "unfollow", middlewareLoggedIn(handlerUnfollow));
     const args = process.argv.slice(2);
     if(args.length === 0){
         console.log("No command provided");
