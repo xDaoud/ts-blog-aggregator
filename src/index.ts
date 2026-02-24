@@ -1,3 +1,4 @@
+import { handlerAgg } from "./agg.js";
 import { CommandsRegistry, registerCommand, runCommand } from "./commands.js";
 import { handlerLogin } from "./login.js";
 import { handlerRegister } from "./register.js";
@@ -9,6 +10,7 @@ async function main() {
     registerCommand(registry, "register", handlerRegister);
     registerCommand(registry, "reset", handleReset);
     registerCommand(registry, "users", handlerUsers);
+    registerCommand(registry, "agg", handlerAgg);
     const args = process.argv.slice(2);
     if(args.length === 0){
         console.log("No command provided");
