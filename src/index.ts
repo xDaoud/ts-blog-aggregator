@@ -2,6 +2,8 @@ import { handlerAddFeed } from "./addfeed.js";
 import { handlerAgg } from "./agg.js";
 import { CommandsRegistry, registerCommand, runCommand } from "./commands.js";
 import { handlerFeeds } from "./feeds.js";
+import { handlerFollow } from "./follow.js";
+import { handlerFollowing } from "./following.js";
 import { handlerLogin } from "./login.js";
 import { handlerRegister } from "./register.js";
 import { handleReset } from "./reset.js";
@@ -15,6 +17,8 @@ async function main() {
     registerCommand(registry, "agg", handlerAgg);
     registerCommand(registry, "addfeed", handlerAddFeed);
     registerCommand(registry, "feeds", handlerFeeds);
+    registerCommand(registry, "follow", handlerFollow);
+    registerCommand(registry, "following", handlerFollowing);
     const args = process.argv.slice(2);
     if(args.length === 0){
         console.log("No command provided");
