@@ -29,6 +29,13 @@
       "when": 1772029444639,
       "tag": "0003_unknown_proteus",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1772042484323,
+      "tag": "0004_bizarre_spirit",
+      "breakpoints": true
     }
   ]
 }

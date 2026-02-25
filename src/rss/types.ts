@@ -13,3 +13,11 @@ export type RSSItem = {
   description: string;
   pubDate: string;
 };
+
+export type RSSPost = {
+  title: string;
+  url: string;
+  description?: string;
+  publishedAt?: Date;
+  feedId: string;
+};
