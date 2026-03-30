@@ -1,5 +1,6 @@
 import { getPostsForUser } from "../db/queries/posts.js";
 import { User } from "../db/schema.js";
+import { CLIError } from "../errors.js";
 import { parseDuration } from "../parseDuration.js";
 import { scrapeFeeds } from "../rss/scrape.js";
 
@@ -8,7 +9,7 @@ export async function handlerBrowse(cmdName: string, user: User, ...args: string
     if (args) {
         limit = parseInt(args[0], 10);
         if (isNaN(limit) || limit <= 0) {
-            throw new Error("Invalid limit");
+            throw new CLIError("Invalid limit");
         }
     }
     const posts = await getPostsForUser(user.id, limit);
@@ -23,7 +24,7 @@ export async function handlerBrowse(cmdName: string, user: User, ...args: string
 
 export async function handlerAgg(cmdName: string, ...args: string[]): Promise<void> {
     if (args.length === 0) {
-        throw new Error("duration expected!");
+        throw new CLIError("duration expected!");
     }
     const timeBetweenRequests = parseDuration(args[0]);
     console.log(`Collecting feeds every ${timeBetweenRequests}`);

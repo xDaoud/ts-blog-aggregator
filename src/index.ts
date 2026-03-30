@@ -3,6 +3,7 @@ import { handlerAddFeed, handlerFeeds, handlerFollow, handlerFollowing, handlerU
 import { handlerAgg, handlerBrowse } from "./handlers/posts.js";
 import { CommandsRegistry, registerCommand, runCommand } from "./commands.js";
 import { middlewareLoggedIn } from "./middleware/loggedIn.js";
+import { CLIError } from "./errors.js";
 async function main() {
     const registry: CommandsRegistry = {};
     registerCommand(registry, "login", handlerLogin);
@@ -18,7 +19,7 @@ async function main() {
     registerCommand(registry, "browse", middlewareLoggedIn(handlerBrowse));
     const args = process.argv.slice(2);
     if(args.length === 0){
-        console.log("No command provided");
+        console.error("No command provided");
         process.exit(1);
     }
     const cmdName = args[0];
@@ -26,8 +27,12 @@ async function main() {
     try {
         await runCommand(registry, cmdName, ...cmdArgs);
         process.exit(0);
-    } catch(err : any) {
-        console.error(err.message);
+    } catch(err) {
+        if (err instanceof CLIError) {
+            console.error(`Error: ${err.message}`);
+        } else {
+            console.error("Unexpected error:", err);
+        }
         process.exit(1);
     }
 }

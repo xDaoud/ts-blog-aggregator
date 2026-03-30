@@ -148,3 +148,14 @@ You can try:
 - Drizzle ORM
 - PostgreSQL
 - Node.js
+
+---
+
+# Acknowledgments
+
+This project was built as part of the **TypeScript backend curriculum** on
+Boot.dev.
+
+Boot.dev provides hands-on guided projects focused on building real backend systems using modern tools and languages.
+
+---

@@ -2,10 +2,11 @@ import { printFeed } from "../db/printFeeds.js";
 import { createFeed, getFeedsWithUsers, getFeedByUrl } from "../db/queries/feeds.js";
 import { createFeedFollow, getFeedFollowsForUser, deleteFeedFollowByUrl } from "../db/queries/follows.js";
 import { User } from "../db/schema.js";
+import { CLIError } from "../errors.js";
 
 export async function handlerAddFeed(cmdName: string, user: User, ...args: string[]): Promise<void> {
     if (args.length < 2) {
-        throw new Error("name and url expected!");
+        throw new CLIError("name and url expected!");
     }
     const [name, url] = args;
     const feed = await createFeed(name, url, user.id);
@@ -24,12 +25,12 @@ export async function handlerFeeds(cmdName: string, ...args: string[]): Promise<
 
 export async function handlerFollow(cmdName: string, user: User, ...args: string[]): Promise<void> {
     if (args.length === 0) {
-        throw new Error("url expected!");
+        throw new CLIError("url expected!");
     }
     const url = args[0];
     const [feed] = await getFeedByUrl(url);
     if (!feed) {
-        throw new Error(`No feed found at ${url}`);
+        throw new CLIError(`No feed found at ${url}`);
     }
     const follow = await createFeedFollow(user.id, feed.id);
     console.log(`${follow.userName} is now following ${follow.feedName}`);
@@ -37,7 +38,7 @@ export async function handlerFollow(cmdName: string, user: User, ...args: string
 
 export async function handlerUnfollow(cmdName: string, user: User, ...args: string[]): Promise<void> {
     if (args.length < 1) {
-        throw new Error("Please privide a URL");
+        throw new CLIError("Please privide a URL");
     }
     const url = args[0];
     const deleted = await deleteFeedFollowByUrl(user.id, url);
@@ -51,7 +52,7 @@ export async function handlerUnfollow(cmdName: string, user: User, ...args: stri
 export async function handlerFollowing(cmdName: string, user: User, ...args: string[]): Promise<void> {
     const rows = await getFeedFollowsForUser(user.id);
     if (!rows) {
-        throw new Error("You're not following any feeds!");
+        throw new CLIError("You're not following any feeds!");
     }
     for (const row of rows) {
         console.log(row.feedName);

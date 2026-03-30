@@ -2,6 +2,7 @@ import { CommandHandler } from "src/commands";
 import { getUser } from "src/config";
 import { getUserByName } from "src/db/queries/users";
 import { User } from "src/db/schema";
+import { CLIError } from "src/errors";
 
 type UserCommandHandler = (
   cmdName: string,
@@ -16,7 +17,7 @@ export const middlewareLoggedIn =
 
     const user = await getUserByName(userName);
     if (!user) {
-      throw new Error(`User ${userName} not found`);
+      throw new CLIError(`User ${userName} not found`);
     }
 
     return await handler(cmdName, user, ...args);

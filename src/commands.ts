@@ -1,3 +1,5 @@
+import { CLIError } from "./errors.js";
+
 export type CommandHandler = (cmdName: string, ...args: string[]) => Promise<void>;
 
 export type CommandsRegistry = Record<string, CommandHandler>;
@@ -17,7 +19,7 @@ export async function runCommand(
 ): Promise<void>{
     const handler = registry[cmdName];
     if(!handler){
-        throw new Error("Unknown command");
+        throw new CLIError("Unknown command");
     }
     await handler(cmdName, ...args);
 }

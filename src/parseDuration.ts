@@ -1,8 +1,10 @@
+import { CLIError } from "./errors.js";
+
 export function parseDuration(durationStr: string): number {
     const regex = /^(\d+)(ms|s|m|h)$/;
     const match = durationStr.match(regex);
     if(!match){
-        throw new Error("Invalid duration");
+        throw new CLIError("Invalid duration");
     }
     const value = parseInt(match[1], 10);
     const unit = match[2];
@@ -16,7 +18,7 @@ export function parseDuration(durationStr: string): number {
     case "h":
       return value * 60 * 60 * 1000;
     default:
-      throw new Error("Invalid Unit");
+      throw new CLIError("Invalid Unit");
   }
 
 }
