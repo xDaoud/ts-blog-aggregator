@@ -1,16 +1,8 @@
-import { handlerAddFeed } from "./addfeed.js";
-import { handlerAgg } from "./agg.js";
-import { handlerBrowse } from "./browse.js";
+import { handlerLogin, handlerRegister, handleReset, handlerUsers } from "./handlers/auth.js";
+import { handlerAddFeed, handlerFeeds, handlerFollow, handlerFollowing, handlerUnfollow } from "./handlers/feeds.js";
+import { handlerAgg, handlerBrowse } from "./handlers/posts.js";
 import { CommandsRegistry, registerCommand, runCommand } from "./commands.js";
-import { handlerFeeds } from "./feeds.js";
-import { handlerFollow } from "./follow.js";
-import { handlerFollowing } from "./following.js";
-import { handlerLogin } from "./login.js";
 import { middlewareLoggedIn } from "./middleware/loggedIn.js";
-import { handlerRegister } from "./register.js";
-import { handleReset } from "./reset.js";
-import { handlerUnfollow } from "./unfollow.js";
-import { handlerUsers } from "./users.js";
 async function main() {
     const registry: CommandsRegistry = {};
     registerCommand(registry, "login", handlerLogin);
