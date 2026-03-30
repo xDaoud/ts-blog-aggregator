@@ -1,5 +1,5 @@
 import os from "os";
-import fs, { write } from "fs";
+import fs from "fs";
 import path from "path";
 
 export type Config = {
